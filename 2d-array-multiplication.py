@@ -5,7 +5,7 @@
     the top line of the array (bar placeholder) is multiplied by the secret_key 'sk' which is determined by the user
     the multiplied array is then iterated downwards to the bottom of the array, each line starting with the secret key (it look like a multiplication table)
     
-    Example: input of "Hello"  - uses the defualt cipher (bottom of code)
+    Example: input of "Hello"  - uses a random cipher i used for development
     ^-- length of message is 5
        ^-- array dimensions are 6 x 6 
     [
