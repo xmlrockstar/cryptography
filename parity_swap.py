@@ -8,7 +8,7 @@ bin_2 = ''
 
 # def get_alphabet():
 
-def encode(msg: str):
+def encode(msg: str, quiet) -> list[str]:
     part1 = ''
     part2 = ''
     add_null_byte = False
@@ -50,9 +50,16 @@ def encode(msg: str):
 
     bin_1 = binary_msg
     bin_2 = final_binary
+
+    if quiet:
+        print("msg p1: ", bin_1)
+        print("msg p2: ", binary_msg_2)
+        print("parity: ", final_binary)
+
     return [bin_1, bin_2]
 
-def decode(binary_1: str, binary_2: str):
+
+def decode(binary_1: str, binary_2: str, quiet) -> str:
     un_xor_binary = ''
 
     for i in range(len(binary_1)):
@@ -63,15 +70,17 @@ def decode(binary_1: str, binary_2: str):
         else:
             un_xor_binary += '0'
 
-    print('arg1 (msg p1)         ', binary_1) 
-    print('reconstructed (msg p2)', un_xor_binary)
-    print('arg2 (xor)            ', binary_2)
+    if quiet:
+        print('arg1 (msg p1)         ', binary_1) 
+        print('reconstructed (msg p2)', un_xor_binary)
+        print('arg2 (xor)            ', binary_2)
 
     part1 = ''.join(chr(int(binary_1[i:i+8], +2)) for i in range(0, len(binary_1), 8))
     part2 = ''.join(chr(int(un_xor_binary[i:i+8], +2)) for i in range(0, len(un_xor_binary), 8))
 
-    print(part1)
-    print(part2)
+    if quiet:
+        print(part1)
+        print(part2)
     
     final_msg = ''
     for i in range(0, len(part1)):
@@ -81,8 +90,20 @@ def decode(binary_1: str, binary_2: str):
     if final_msg[-1] == '=':
         final_msg=final_msg[:-1]
         
-    print(final_msg)
+    return(final_msg)
 
-encode(message)
-print('---')
-decode('01001000011011000110111100100000011011110110110000100001', '00101101000000000100001101110111000111010000100000011100')
+# encode(message)
+# print('---')
+# decode('01001000011011000110111100100000011011110110110000100001', '00101101000000000100001101110111000111010000100000011100')
+
+def main(q=False):
+    q = True if q else None
+    
+    inp1 = input("Enter message to be encoded: ")
+    print(f'Encoding: {inp1}')
+    bin_enc = encode(inp1, q)
+    decoded = decode(bin_enc[0], bin_enc[1], q)
+    print('Part: 2', bin_enc[1])
+    print('Part: 1', bin_enc[0])
+    print(f'Decoded: {decoded}')
+    
