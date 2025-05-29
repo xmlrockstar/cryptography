@@ -3,6 +3,9 @@ import string
 
 message = "Hello, World!"
 
+bin_1 = ''
+bin_2 = ''
+
 # def get_alphabet():
 
 def encode(msg: str):
@@ -45,9 +48,9 @@ def encode(msg: str):
         else:
             final_binary += '0'
 
-    print('1/2msg    ',binary_msg)
-    print('1/2msg    ',binary_msg_2)
-    print('xor_binary',final_binary)
+    bin_1 = binary_msg
+    bin_2 = final_binary
+    return [bin_1, bin_2]
 
 def decode(binary_1: str, binary_2: str):
     un_xor_binary = ''
